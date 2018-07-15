@@ -30,7 +30,7 @@ var gulpCustomTemplate = function(_opts) {
 		}
 		if (file.isBuffer()) {
 			var contents = file.contents
-			var result = layoutTmp({content: contents, local: true})
+			var result = layoutTmp({content: contents, local: global.__local})
 
 			file.contents = new Buffer(result)
 		}
