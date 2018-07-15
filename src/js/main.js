@@ -49,11 +49,6 @@ w.App = new Vue({
 
 		// routes
 		_afterRoute: function() {
-			// if (window.outerWidth < 698) {
-			// 	this.$refs['scroll-container'].scrollTo(0, 999999);
-			// } else {
-			// 	this.$el.scrollTo(0, 999999);
-			// }
 			this.$nextTick(_.bind(function() {
 				if(window.outerWidth < 698) {
 					this.$refs['scroll-container'].scrollTo(0, 999999);
@@ -62,25 +57,29 @@ w.App = new Vue({
 				}
 			}, this));
 		},
-		_sequenceMessage: function(i, max) {
+		_sequenceMessage: function(i, max, _addTime) {
+			_addTime = parseInt(_addTime);
+			var addTime = (_addTime && _addTime != 0) ? _addTime : 0;
+			if(i == 0) addTime = 0;
 			i++;
 			if(i > max) return;
 
 			this.showTyping = true;
 			this._afterRoute();
+			
 
 			setTimeout(_.bind(function() {
 				this.showTyping = false;
 				this.currentMessage = i;
 				this._afterRoute();
 				setTimeout(_.bind(function(){
-					this._sequenceMessage(i, max);
+					this._sequenceMessage(i, max, _addTime);
 					this._afterRoute();
 				}, this), 0);
-			},this),1200)
+			},this),1200 + addTime);
 		},
 		routeIntro: function() {
-			this._sequenceMessage(0, 3);
+			this._sequenceMessage(0, 2, 1200);
 		},
 		routeSkip: function() {
 			this.skipConnect = true;
@@ -95,7 +94,7 @@ w.App = new Vue({
 		routePlan: function() {
 			this.currentStep = 2;
 			this.currentMessage = 0;
-			this._sequenceMessage(0, 2);
+			this._sequenceMessage(0, 2, 1200);
 		},
 		routeFinal: function() {
 			this.currentStep = 3;
