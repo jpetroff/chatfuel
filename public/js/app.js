@@ -1,26 +1,26 @@
 (function(w){
 "use strict";
-// File /Users/jpetrov/Work/chatfuel/src/js/preamble.js
+// File /Users/john/SyncDocs/reps/chatfuel/src/js/preamble.js
 
 w.Components = {}
-// End of /Users/jpetrov/Work/chatfuel/src/js/preamble.js
+// End of /Users/john/SyncDocs/reps/chatfuel/src/js/preamble.js
 })(window);
 (function(w){
 "use strict";
-// File /Users/jpetrov/Work/chatfuel/src/components/popup.js
+// File /Users/john/SyncDocs/reps/chatfuel/src/components/popup.js
 
 w.Components['popup-modal'] = {
 	template: "<transition name=modal><div class=popup-modal><div class=popup-modal__wrapper @click.stop.self=\"$emit(\'close\')\"><div class=popup-modal__container><div class=popup-modal__header><slot name=header>default header</slot></div><div class=popup-modal__body><slot name=body>default body</slot></div><div class=popup-modal__footer><slot name=footer>default footer <button class=popup-modal__default-button @click=\"$emit(\'close\')\">OK</button></slot></div></div></div></div></transition>"
 }
 
-// End of /Users/jpetrov/Work/chatfuel/src/components/popup.js
+// End of /Users/john/SyncDocs/reps/chatfuel/src/components/popup.js
 })(window);
 (function(w){
 "use strict";
-// File /Users/jpetrov/Work/chatfuel/src/components/text-field.js
+// File /Users/john/SyncDocs/reps/chatfuel/src/components/text-field.js
 
 w.Components['text-field'] = {
-	template: '<div class=text-field :class=\"{\n	\'text-field_error\': validator.$error,\n	\'text-field_has-input\': focus || value\n}\"><div class=disabled-overlay></div><input :value=value @input=updateValue($event.target.value) @focus=\"focus = true\" @blur=\"focus = false\" type=text class=text-field__input id=text-field-field__destination name=destination> <label class=text-field__label for=text-field-field__destination>{{message}}</label></div>',
+	template: '<div class=text-field :class=\"{\n	\'text-field_error\': validator.$error,\n	\'text-field_has-input\': focus || value\n}\"><div class=disabled-overlay></div><input :value=value @input=updateValue($event.target.value) @focus=\"focus = true\" @blur=\"focus = false\" type=text class=text-field__input id=text-field-field__destination name=destination><label class=text-field__label for=text-field-field__destination>{{message}}</label></div>',
 	props: [
 		'label',
 		'label-error',
@@ -53,11 +53,11 @@ w.Components['text-field'] = {
 	}
 }
 
-// End of /Users/jpetrov/Work/chatfuel/src/components/text-field.js
+// End of /Users/john/SyncDocs/reps/chatfuel/src/components/text-field.js
 })(window);
 (function(w){
 "use strict";
-// File /Users/jpetrov/Work/chatfuel/src/js/main.js
+// File /Users/john/SyncDocs/reps/chatfuel/src/js/main.js
 
 w.App = new Vue({
 	data: {
@@ -166,7 +166,6 @@ w.App = new Vue({
 			this.currentStep = 3;
 			this.currentMessage = 0;
 			this._sequenceMessage(0, 1);
-			return;
 			setTimeout(_.bind(function() {
 				this.close();
 				if(!this.skipConnect) {
@@ -212,5 +211,5 @@ w.App = new Vue({
 });
 
 w.App.$mount('#app');
-// End of /Users/jpetrov/Work/chatfuel/src/js/main.js
+// End of /Users/john/SyncDocs/reps/chatfuel/src/js/main.js
 })(window);

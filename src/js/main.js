@@ -105,7 +105,6 @@ w.App = new Vue({
 			this.currentStep = 3;
 			this.currentMessage = 0;
 			this._sequenceMessage(0, 1);
-			return;
 			setTimeout(_.bind(function() {
 				this.close();
 				if(!this.skipConnect) {
