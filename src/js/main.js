@@ -17,6 +17,7 @@ w.App = new Vue({
 		this.botInterface = document.getElementById('bot-interface');
 		this.dashboard = document.getElementById('dashboard-mockup');
 		this.isReady = true;
+		document.body.style.position = 'fixed';
 		setTimeout(_.bind(function(){
 			// this.isOpen = true;
 			this.$el.classList.remove('hide');
@@ -50,6 +51,7 @@ w.App = new Vue({
 		// routes
 		_afterRoute: function() {
 			this.$nextTick(_.bind(function() {
+				return this.$refs['scroll-container'].scrollTo(0, 999999);
 				if(window.outerWidth < 698) {
 					this.$refs['scroll-container'].scrollTo(0, 999999);
 				} else {
@@ -79,7 +81,7 @@ w.App = new Vue({
 			},this),1200 + addTime);
 		},
 		routeIntro: function() {
-			this._sequenceMessage(0, 2, 1200);
+			this._sequenceMessage(0, 3, 0);
 		},
 		routeSkip: function() {
 			this.skipConnect = true;
@@ -105,8 +107,9 @@ w.App = new Vue({
 				if(!this.skipConnect) {
 					this.botInterface.classList.remove('hide');
 					this.dashboard.classList.add('hide');
+					document.body.style.position = 'static';
 				}
-			},this), 2000);
+			},this), 2500);
 		},
 
 

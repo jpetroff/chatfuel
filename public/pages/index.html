@@ -108,42 +108,92 @@
 
 			<div class="carousel" v-if="_showItem(1,1)">
 				<div class="carousel-scroll-container">
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+					<div class="carousel-item light">
+						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+							style="background: rgb(72, 139, 238)"
+						>
+							<div class="cover">
+								<img src="/img/templ_logo_cf.png">
+							</div>
+							<div class="blend-mask" style="linear-gradient(to bottom, rgba(72,139,238,0) 0%,rgba(72,139,238,1) 100%)"></div>
+							<div class="caption">Starter – learn the basic concepts</div>
+							<div class="author">by Chatfuel</div>
 						</div>
-						<div class="carousel-preview"></div>
+						<div class="carousel-preview">Preview</div>
 					</div>
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+					<div class="carousel-item light">
+							<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+							style="background-color: rgb(175, 168, 148);"
+						>
+							<div class="cover">
+								<img src="/img/lead_scoring.jpg">
+							</div>
+							<div class="blend-mask" style="background: linear-gradient(to bottom, rgba(175,168,148,0) 0%,rgba(175,168,148,1) 100%);"></div>
+							<div class="caption">
+									Lead Scoring
+								</div>
+							<div class="author">by Dana Tran</div>
 						</div>
-						<div class="carousel-preview"></div>
+						<div class="carousel-preview">Preview</div>
 					</div>
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+					<div class="carousel-item dark">
+							<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+							style="background-color: white;border: 1px solid #f2f2f2"
+						>
+							<div class="cover">
+								<img src="/img/shopify.png">
+							</div>
+							<!-- <div class="blend-mask" style="background: linear-gradient(to bottom, rgba(175,168,148,0) 0%,rgba(175,168,148,1) 100%);"></div> -->
+							<div class="caption">
+									Shopify Store
+								</div>
+							<div class="author">by GoBeyond.ai</div>
 						</div>
-						<div class="carousel-preview"></div>
+						<div class="carousel-preview">Preview</div>
 					</div>
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+					<div class="carousel-item light">
+							<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+								style="background: rgb(72, 139, 238)"
+							>
+								<div class="cover">
+									<img src="/img/templ_logo_cf.png">
+								</div>
+								<div class="blend-mask" style="linear-gradient(to bottom, rgba(72,139,238,0) 0%,rgba(72,139,238,1) 100%)"></div>
+								<div class="caption">Starter – learn the basic concepts</div>
+								<div class="author">by Chatfuel</div>
+							</div>
+							<div class="carousel-preview">Preview</div>
 						</div>
-						<div class="carousel-preview"></div>
-					</div>
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+						<div class="carousel-item light">
+								<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+								style="background-color: rgb(175, 168, 148);"
+							>
+								<div class="cover">
+									<img src="/img/lead_scoring.jpg">
+								</div>
+								<div class="blend-mask" style="background: linear-gradient(to bottom, rgba(175,168,148,0) 0%,rgba(175,168,148,1) 100%);"></div>
+								<div class="caption">
+										Lead Scoring
+									</div>
+								<div class="author">by Dana Tran</div>
+							</div>
+							<div class="carousel-preview">Preview</div>
 						</div>
-						<div class="carousel-preview"></div>
-					</div>
-					<div class="carousel-item">
-						<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)">
-							<div class="caption">Starter</div>
+						<div class="carousel-item dark">
+								<div class="carousel-choose" v-on:click="chooseTemplate($event.currentTarget)" 
+								style="background-color: white;border: 1px solid #f2f2f2"
+							>
+								<div class="cover">
+									<img src="/img/shopify.png">
+								</div>
+								<!-- <div class="blend-mask" style="background: linear-gradient(to bottom, rgba(175,168,148,0) 0%,rgba(175,168,148,1) 100%);"></div> -->
+								<div class="caption">
+										Shopify Store
+									</div>
+								<div class="author">by GoBeyond.ai</div>
+							</div>
+							<div class="carousel-preview">Preview</div>
 						</div>
-						<div class="carousel-preview"></div>
-					</div>
 				</div>
 			</div>
 
@@ -171,6 +221,8 @@
 		<div class="chat-section" v-if="_showItem(2,0)">
 			<div class="avatar"></div>
 
+			<!-- high load -->
+
 			<div class="message" v-if="_showItem(2,1) && (fbpage == 'Script Doctor')">
 				<div class="text">You’re likely to reach the limit of 5,000 users
 					<div style="display:inline-block">in&nbsp;4–5 days</div> based on your page’s engagement statistics 📊</div>
@@ -179,6 +231,23 @@
 			<div class="message action-followup" v-if="_showItem(2,2) && (fbpage == 'Script Doctor')">
 				<div class="text">Subscribe to PRO plan now to get more users onboard. Get to know them closer: edit attributes and create segments to drive
 					conversions and engagement. This is a sure way to grow!</div>
+			</div>
+
+			<!-- alternative  -->
+
+			<div class="message has-img" v-if="_showItem(2,1) && (skipConnect || fbpage == 'Digital Mirror')">
+				<div class="img-wrap">
+					<img src="/img/teaser.png" srcset="/img/teaser@2x.png 2x" />
+				</div>
+			</div>
+
+			<div class="message action-followup" v-if="_showItem(2,2) && (skipConnect || fbpage == 'Digital Mirror')">
+				<div class="text">
+					<p><i class="bullet">1</i>Subscribe to PRO to get the data that helps bringing new users onboard;</p>
+					<p><i class="bullet">2</i>Use attributes and segments to drive conversions;</p>
+					<p><i class="bullet">3</i>Collect more data to power marketing efforts.</p>
+					<br>This is a sure way to grow!
+				</div>
 			</div>
 
 			<div class="button-selector no-img" v-if="_showItem(2,2)">
