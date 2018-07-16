@@ -38,15 +38,15 @@
 				<div class="text">Hi, Eugene 👋 <br><br>Thrilled to have you joining our community <nowrap>of&nbsp;chat-bot</nowrap> pioneers!</div>
 			</div>
 
-			<div class="message" v-if="_showItem(0,1)">
+			<div class="message" v-if="_showItem(0,2)">
 				<div class="text">I’ll guide you through the steps towards your first bot</div>
 			</div>
 
-			<div class="message action-followup" v-if="_showItem(0,2)">
+			<div class="message action-followup" v-if="_showItem(0,3)">
 				<div class="text">Step 1:<br> Bots operate on behalf of Facebook pages, so you need to connect one first</div>
 			</div>
 
-			<div class="button-selector" v-if="_showItem(0,2)">
+			<div class="button-selector" v-if="_showItem(0,3)">
 				<div class="list-item" v-on:click="choosePage($event.currentTarget)">
 					<img src="/img/empty_group.png" srcset="/img/empty_group@2x.png 2x" class="icon">
 					<div class="caption">Digital Mirror</div>
@@ -64,7 +64,7 @@
 		</div>
 
 		<!-- step 1 suggest -->
-		<div class="user-suggest-list" v-if="_showItem(0,2) && !fbpage && !skipConnect">
+		<div class="user-suggest-list" v-if="_showItem(0,3) && !fbpage && !skipConnect">
 			<div class="user-suggest">
 				<span class="c">Create new</span>
 			</div>
@@ -172,12 +172,13 @@
 			<div class="avatar"></div>
 
 			<div class="message" v-if="_showItem(2,1) && (fbpage == 'Script Doctor')">
-				<div class="text">You’re likely to reach the limit of 5,000 users <div style="display:inline-block">in&nbsp;4–5 days</div> based on your page’s engagement statistics 📊</div>
+				<div class="text">You’re likely to reach the limit of 5,000 users
+					<div style="display:inline-block">in&nbsp;4–5 days</div> based on your page’s engagement statistics 📊</div>
 			</div>
-
+			
 			<div class="message action-followup" v-if="_showItem(2,2) && (fbpage == 'Script Doctor')">
 				<div class="text">Subscribe to PRO plan now to get more users onboard. Get to know them closer: edit attributes and create segments to drive
-				conversions and engagement. This is a sure way to grow!</div>
+					conversions and engagement. This is a sure way to grow!</div>
 			</div>
 
 			<div class="button-selector no-img" v-if="_showItem(2,2)">
