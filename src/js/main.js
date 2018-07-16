@@ -96,7 +96,8 @@ w.App = new Vue({
 		routePlan: function() {
 			this.currentStep = 2;
 			this.currentMessage = 0;
-			this._sequenceMessage(0, 2, 1200);
+			var _addTime = (this.fbpage == 'Script Doctor') ? 0 : 500;
+			this._sequenceMessage(0, 2, _addTime);
 		},
 		routeFinal: function() {
 			this.currentStep = 3;
