@@ -123,12 +123,14 @@ w.App = new Vue({
 		_sequenceMessage: function(i, max, _addTime) {
 			_addTime = parseInt(_addTime);
 			var addTime = (_addTime && _addTime != 0) ? _addTime : 0;
-			if(i == 0) addTime = 0;
+			if(i == 0) addTime = -500;
 			i++;
 			if(i > max) return;
 
 			this.showTyping = true;
 			this._afterRoute();
+
+			console.log(1200 + addTime, _addTime);
 			
 
 			setTimeout(_.bind(function() {
@@ -157,13 +159,14 @@ w.App = new Vue({
 		routePlan: function() {
 			this.currentStep = 2;
 			this.currentMessage = 0;
-			var _addTime = (this.fbpage == 'Script Doctor') ? 0 : 500;
+			var _addTime = (this.fbpage == 'Digital Mirror' || this.skipConnect) ? -500 : 500;
 			this._sequenceMessage(0, 2, _addTime);
 		},
 		routeFinal: function() {
 			this.currentStep = 3;
 			this.currentMessage = 0;
 			this._sequenceMessage(0, 1);
+			return;
 			setTimeout(_.bind(function() {
 				this.close();
 				if(!this.skipConnect) {
