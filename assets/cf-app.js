@@ -6,11 +6,11 @@ app.use(express.static(__dirname));
 console.log(__dirname);
 
 app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/pages/home.html')
+	res.sendFile(__dirname + '/home.html')
 })
 
 app.get('/get-started', function (req, res) {
-	res.sendFile(__dirname + '/pages/index.html')
+	res.sendFile(__dirname + '/index.html')
 })
 
 app.listen(8082, '0.0.0.0', function () {

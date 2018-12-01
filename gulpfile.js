@@ -1,12 +1,19 @@
 global.__src = __dirname
-global.__local = (process.env.P != '1')
-var gulp = require('gulp')
+global.base = __dirname + '/src';
+global.out = __dirname + '/public';
+global.live = __dirname + '/live';
+global.live_dir = 'chatfuel-first-session';
+global.PROD = (process.env.PROD == '1' || process.env.PROD == '2');
+global.LIVE = (process.env.PROD == '2');
+global.destdir = LIVE ? live : out;
 
-console.log(global.__local);
+var gulp = require('gulp');
 
-require('./build/gulp-build')
-require('./build/gulp-server')
-require('./build/gulp-pages')
+console.log('Mode: ' + PROD + ', Destination Directory: ' + destdir);
+
+require(__src + '/build/gulp-build');
+require(__src + '/build/gulp-server');
+require(__src + '/build/gulp-pages');
 
 gulp.task('start', ['build','server'])
 gulp.task('build', ['js-libs', 'js-build', 'less', 'pages', 'assets'])

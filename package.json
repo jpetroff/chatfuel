@@ -4,7 +4,7 @@
   "devDependencies": {
     "express": "latest",
     "fs-extra": "latest",
-    "gulp": "*",
+    "gulp": "latest",
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-less": "^3.1.0",
@@ -24,7 +24,8 @@
     "path": "latest",
     "uglify": "^0.1.5",
     "uglify-js": "^2.7.3",
-    "vinyl-source-stream": "latest"
+    "vinyl-source-stream": "latest",
+    "gulp-livereload": "^3.8.1"
   },
   "dependencies": {
     "normalizecss": "^3.0.0",

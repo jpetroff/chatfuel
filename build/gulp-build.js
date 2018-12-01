@@ -13,25 +13,30 @@ var remember = require('gulp-remember')
 var vueExtract = require('./gulp-vue-extract')
 var wrapjs = require('./gulp-jswrapper')
 var print = require('gulp-print')
+var livereload = require('gulp-livereload')
 
 var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions']})
 
-global.__production = !global.__local
-global.__injection = false
-
 gulp.task('js-libs', function(){
-	var base = './src/libs/js/'
+	var basejs = base + '/libs/js/';
 
 	gulp.src([
-			base + 'vue.min.js',
-			base + 'underscore-min.js'
+			basejs + 'vue.min.js',
+			basejs + 'vuelidate.min.js',
+			basejs + 'validators.min.js',
+			basejs + 'underscore-min.js'
 		])
 		.pipe(concat('libs.js'))
-		.pipe(gulp.dest('./public/js'))
+		.pipe(gulp.dest(destdir + '/js'))
+		.pipe(livereload());
 });
 
 gulp.task('js-build', function(){
-	gulp.src(['src/js/*.js', 'src/components/*.vue',  'src/apps/*.vue'])
+	gulp.src([
+		base+'/js/*.js',
+		base+'/components/*.vue', 
+		base+'/apps/*.vue'
+	])
 		.pipe(vueExtract({
 			type:'script',
 			storeTemplate: 'inline'
@@ -45,40 +50,58 @@ gulp.task('js-build', function(){
 			'components/*.js',
 			'apps/*.js',
 			'js/main.js'
-		], {base: './src'}))
+		], {base: base}))
 		.pipe(concat('app.js'))
-		.pipe(gulp.dest('public/js'))
+		.pipe(gulp.dest(destdir + '/js'))
+		.pipe(livereload())
 
 });
 
 gulp.task('less', function(){
-	gulp.src(['src/less/**/*.less', 'src/components/*.vue', 'src/apps/*.vue', 'src/libs/css/normalize.css'])
+	var lessConfig = {
+		paths: ['.'],
+		plugins: [autoprefix],
+		rewriteUrls: 'all',
+		rootpath: '/'
+	};
+	console.log(LIVE);
+	if(LIVE) {
+		lessConfig.rootpath = '/'+live_dir+'/';
+		lessConfig.rewriteUrls = 'all';
+	}
+
+
+	gulp.src([
+		base + '/less/**/*.less',
+		base + '/components/*.less',
+		base + '/apps/*.less',
+		base + '/libs/css/normalize.css'
+	])
 		.pipe(cache('less'))
 		.pipe(print())
-		.pipe(vueExtract({
-			type:'style'
-		}))
+		// .pipe(vueExtract({
+		// 	type:'style'
+		// }))
 		.pipe(sourcemaps.init())
-		.pipe(less({
-			paths: ['.'],
-			plugins: [autoprefix]
-		}))
+		.pipe(less(lessConfig))
 		.pipe(remember('less'))
 		.pipe(order([
 			'libs/css/normalize.css',
 			'components/*.less',
 			'apps/*.less',
 			'less/**/*.less'
-		],{base: './src'}))
+		],{base: base}))
 		.pipe(concat('main.css'))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('./public/css'));
+		.pipe(gulp.dest(destdir + '/css'))
+		.pipe(livereload());
 })
 
 gulp.task('assets', function() {
-	gulp.src(['assets/**'])
-		.pipe(gulp.dest('./public'))
-})
+	gulp.src(__src + '/assets/**/*')
+		.pipe(gulp.dest(destdir))
+		.pipe(livereload());
+});
 
 
 

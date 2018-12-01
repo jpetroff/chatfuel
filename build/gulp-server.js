@@ -1,43 +1,33 @@
 var gulp = require('gulp')
 var express = require('express')
-var livereload = require('livereload')
+var livereload = require('gulp-livereload')
 var path = require('path')
 
-var changeLog = function(watcher, name) {
-	watcher.on('change', function(ev) {
-		console.log('['+name+'] → File '+path.basename(ev.path)+' was '+ev.type)
-	})
+function run(gulpTask) {
+	var taskString = (typeof gulpTask === 'string') ? gulpTask : gulpTask.join(',');
+	return function(ev) {
+		console.log('[ ' + taskString + ' ] → File ' + path.relative(base, ev.path) + ' was ' + ev.type);
+		gulp.start(gulpTask);
+	}
 }
 
 gulp.task('server', function() {
-	var lr = livereload.createServer()
-	lr.watch(__src + '/public')
+	livereload.listen();
 
-	var wJSLibs = gulp.watch('./src/libs/js/*.js', ['js-libs'])
-	changeLog(wJSLibs, 'js-libs')
+	gulp.watch('/libs/js/*.js', {cwd: base}, run('js-libs') );
 
-	var wJSBuild = gulp.watch(['./src/js/**/*.js','./src/**/*.vue'], ['js-build'])
-	changeLog(wJSBuild, 'js-build')
+	gulp.watch([
+		'js/**/*.js',
+		'**/*.vue'
+	], {cwd: base}, run('js-build'));
 
-	var wLess = gulp.watch(['./src/less/**/*.less','./src/**/*.vue'], ['less'])
-	changeLog(wLess, 'less')
+	gulp.watch([
+		'less/**/*.less',
+		'components/**/*.less',
+		'apps/**/*.less'
+	], {cwd: base}, run('less'));
 
-	var wPages = gulp.watch('./src/pages/*.html', ['pages'])
-	changeLog(wPages, 'pages')
+	gulp.watch(['pages/*.html', 'layouts/*.html'], {cwd: base}, run('pages'));
 
-	var app = express()
-
-	app.use(express.static('./public'))
-
-	app.get('/', function(req, res) {
-		res.sendFile(__src + '/public/pages/home.html')
-	})
-
-	app.get('/get-started', function (req, res) {
-		res.sendFile(__src + '/public/pages/index.html')
-	})
-
-	app.listen('8000', '0.0.0.0', function() {
-		console.log('express has took off')
-	})
+	gulp.watch('assets/**/*', { cwd: __src }, run('assets'));
 })
